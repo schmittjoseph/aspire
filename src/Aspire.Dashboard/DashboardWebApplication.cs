@@ -126,7 +126,9 @@ public class DashboardWebApplication
 
         _app.UseAntiforgery();
 
-        _app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
+        _app.MapRazorComponents<App>()
+            .AddInteractiveServerRenderMode()
+            .AddAdditionalAssemblies(_app.Services.GetServices<ExtraBlazorAssembly>().Select(e => e.Assembly).ToArray());
 
         // OTLP gRPC services.
         _app.MapGrpcService<OtlpMetricsService>();

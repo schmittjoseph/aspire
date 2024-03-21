@@ -2,6 +2,7 @@
 @using Aspire.Dashboard.Resources
 @inject IStringLocalizer<Layout> Loc
 @inject IDashboardClient DashboardClient
+@inject IEnumerable<ExtraNavButton> NavButtons
 
 <FluentAppBar>
     @if (DashboardClient.IsEnabled)
@@ -33,4 +34,13 @@
         Icon="MetricsIcon()"
         SecondaryIcon="MetricsIcon(secondary: true)"
         Text="@Loc[nameof(Layout.NavMenuMetricsTab)]" />
+
+    @foreach (ExtraNavButton button in NavButtons)
+    {
+        <FluentAppBarItem Href="@button.HRef"
+                          Icon="@button.Icon"
+                          SecondaryIcon="@button.SecondaryIcon"
+                          Text="@button.Name" />
+    }
+
 </FluentAppBar>

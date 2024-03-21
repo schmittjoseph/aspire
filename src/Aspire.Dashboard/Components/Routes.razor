@@ -1,6 +1,8 @@
-﻿@inject IStringLocalizer<Resources.Routes> Loc
+﻿@using Aspire.Dashboard.Model
+@inject IStringLocalizer<Resources.Routes> Loc
+@inject IEnumerable<ExtraBlazorAssembly> ExtraBlazorAssemblies
 
-<Router AppAssembly="@typeof(App).Assembly">
+<Router AppAssembly="@typeof(App).Assembly" AdditionalAssemblies="@ExtraBlazorAssemblies.Select(b => b.Assembly)">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(Layout.MainLayout)" />
     </Found>
